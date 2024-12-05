@@ -235,6 +235,13 @@ impl<I: Hash + Eq, S: Clone> Simple<I, S> {
         }
     }
 
+    pub fn map_span(self, f: impl FnOnce(S) -> S) -> Self {
+        Self {
+            span: f(self.span),
+            ..self
+        }
+    }
+
     /// Returns the span that the error occurred at.
     pub fn span(&self) -> S {
         self.span.clone()
